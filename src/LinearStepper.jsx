@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./index.css";
+import Stack from '@mui/material/Stack';
+import IntlTelInput from "react-intl-tel-input";
+import "react-intl-tel-input/dist/main.css";
 import {
+  Select,
   Typography,
   TextField,
   Checkbox,
@@ -33,15 +37,22 @@ const useStyles = createTheme((theme) => ({
 
 function getSteps() {
   return [
-    "Personnel Details",
-    "Educational Details",
-    "Internship Interested Field",
-    "Internship Option",
-    "References",
-    "Submission"
+    // "Personnel Details",
+    // "Educational Details",
+    // "Internship Interested Field",
+    // "Internship Option",
+    // "References",
+    // "Submission"
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
   ];
 }
 const BasicForm = () => {
+  
   const {
     control,
     formState: { errors },
@@ -50,25 +61,31 @@ const BasicForm = () => {
   return (
     <>
     <div className='third'>
-          <h2 style={{ margin: "1rem" }}>--* Personnal Details *-- </h2>
+          <h1 style={{margin:"2rem",}}><mark style={{border:"5px solid deepskyblue", borderRadius:"125rem",margin:"1rem",padding:"1rem"}}>--*Personnal Details*--</mark></h1>
         </div>
         <div className='fourth'>
-        <label htmlFor='name' className='required' ><br /><br /><br /><hr/><br />
+        <label htmlFor='name' className='required' >
               Name
-            </label><br />
-           
+            </label>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }}
+>
+       
+        
       <Controller
         control={control}
         name="firstName"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "Enter Your First Name.", maxLength: 12,minLength:3}}
         render={({ field }) => (
           <TextField
             id="first-name"
             label="First Name"
             type="text"
             autoComplete="off"
+            // autoFocus="true"
             variant="standard"
-            placeholder="Enter Your First Name"
+            placeholder=""
             fullWidth
             margin="normal"
             {...field}
@@ -77,27 +94,15 @@ const BasicForm = () => {
           />
         )}
       />
-        {/* <Controller
-        name="MyCheckbox"
-        control={control}
-        rules={{ required:"this field is required." }}
-        render={({ field }) =>(
-         <Radio 
-        id="radio"
-        margin="normal"
-        type="radio"
-        {...field} 
-        error={Boolean(errors?.MyCheckbox)}
-            helperText={errors.MyCheckbox?.message}
-        />)}
-      /> */}
+
+        
 
 
 
       <Controller
         control={control}
         name="lastName"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "Enter Your Last Name.", maxLength: 20,minLength:3 }}
         render={({ field }) => (
           <TextField
             id="last-name"
@@ -105,7 +110,7 @@ const BasicForm = () => {
             variant="standard"
             type="text"
             autoComplete="off"
-            placeholder="Enter Your Last Name"
+            placeholder=""
             fullWidth
             margin="normal"
             {...field}
@@ -114,20 +119,57 @@ const BasicForm = () => {
           />
         )}
       />
+      </Stack>
+
+      {/* <Controller
+        control={control}
+        name="lastName"
+        rules={{ required: "Enter Your Last Name.", maxLength: 20,minLength:3,required:true }}
+        render={({ field }) => (
+          <TextField
+            id="last-name"
+            label="male"
+            type="radio"
+            autoComplete="off"
+            placeholder=""
+            {...field}
+            error={Boolean(errors?.lastName)}
+            helperText={errors.lastName?.message}
+          />
+        )}
+      /> */}
+      {/* <Controller
+        name="Radio"
+        control={control}
+        rules={{ required:"this field is required." }}
+        render={({ field }) =>(
+         <Radio 
+        id="radio"
+        margin="normal"
+        
+        {...field}
+            error={Boolean(errors?.firstName)}
+            helperText={errors.firstName?.message}
+          />
+        )}
+      /> */}
+
 <label htmlFor='Contact Number' className='required' ><br />
               Contact Number
             </label><br />
       <Controller
         control={control}
         name="ContactNumber"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "Enter Your Contact Number.", maxLength: 12 ,minLength:1,pattern:"[0-9]{3}-[0-9]{2}-[0-9]{3}"}}
         render={({ field }) => (
           <TextField
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             id="Contact-Number"
             label=""
             variant="standard"
             type="number"
             placeholder="Enter Your Contact Number"
+            
             fullWidth
             margin="normal"
             {...field}
@@ -143,15 +185,16 @@ const BasicForm = () => {
 <Controller
         control={control}
         name="Email"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "Enter Your Email. name.@domain.com",pattern:"[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$.com"}}
         render={({ field }) => (
           <TextField
+            inputProps={{ inputMode: 'Email', pattern: '[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$' }}
             id="Email"
             label=""
             variant="standard"
             placeholder="Enter Your Email"
             autoComplete="off"
-            type="email"
+            type="Email"
             fullWidth
             margin="normal"
             {...field}
@@ -168,9 +211,10 @@ const BasicForm = () => {
 <Controller
         control={control}
         name="Whatsapp"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "Enter Your Whatsapp Number", maxLength: 12 ,minLength:1,pattern:"[0-9]{3}-[0-9]{2}-[0-9]{3}" }}
         render={({ field }) => (
           <TextField
+           inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             id="Whatsapp"
             label=""
             variant="standard"
@@ -192,7 +236,7 @@ const BasicForm = () => {
 <Controller
         control={control}
         name="Country"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "Enter Your Country Name",maxLength:12}}
         render={({ field }) => (
           <TextField
             id="Country"
@@ -217,7 +261,7 @@ const BasicForm = () => {
 <Controller
         control={control}
         name="City"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "Enter Your City Name.",maxLength:12 }}
         render={({ field }) => (
           <TextField
             id="City"
@@ -234,6 +278,158 @@ const BasicForm = () => {
           />
         )}
       />
+
+{/* <label htmlFor='gender' className='required' ><br />
+              gender
+            </label><br />
+            <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+
+  <label>Female</label>
+      <Controller
+      
+      control={control} 
+       
+        name="gender"
+        // rules={{required:"r" }}
+        
+        label="Female"
+        render={({ field }) => (
+          
+       <TextField
+       
+       style={{}}
+             type="radio"
+             autoComplete="off"
+             value="female" 
+          {...field}
+            error={Boolean(errors?.gender)}
+            helperText={errors.gender?.message}
+          />
+        )}
+      />
+    
+<label>male</label>
+    <Controller
+      control={control} 
+      
+      name="gender"
+      // rules={{  }}
+      
+      label="male"
+      render={({ field }) => (
+     <TextField
+     style={{borderRadius:"100rem"}}
+           type="radio"
+           autoComplete="off"
+           value="male" 
+        {...field}
+          error={Boolean(errors?.gender)}
+          helperText={errors.gender?.message}
+        />
+      )}
+    />
+<label>Other</label>
+<Controller
+       control={control} 
+       
+      name="gender"
+      
+     
+      label="other"
+      render={({ field }) => (
+     <TextField
+     style={{}}
+           type="radio"
+           autoComplete="off"
+           value="other"
+        {...field}
+          error={Boolean(errors?.gender)}
+          helperText={errors.gender?.message}
+        />
+      )}
+    /> */}
+       
+       {/* <form>
+      <Controller
+        name="gender"
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (<Radio 
+        type="radio"
+        {...field} 
+        error={Boolean(errors?.box)}
+            helperText={errors.box?.message}
+        />)}
+      />
+       <Controller
+        name="ox"
+        control={control}
+        rules={{ required: "enter" }}
+        render={({ field }) => (
+        <Radio 
+        id="radio"
+        type="radio"
+        {...field} 
+        error={Boolean(errors?.ox)}
+            helperText={errors.ox?.message}
+        />
+        )}
+      />
+      <Controller
+        name="ox"
+        control={control}
+        rules={{ required: "enter" }}
+        render={({ field }) => (
+        <Radio 
+        id="radio"
+        type="radio"
+        {...field} 
+        error={Boolean(errors?.ox)}
+            helperText={errors.ox?.message}
+        />
+        )}
+      />
+
+      </form> */}
+  
+  
+       {/* </Stack> */}
+       <label htmlFor='gender' className='required' ><br />
+              gender
+            </label><br />
+            <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+       <FormControl>
+      <FormLabel id="demo-row-radio-buttons-group-label"></FormLabel>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+        rules={{ required:true }}
+        
+      >
+      <Controller
+      control={control}
+        name="City"
+        rules={{ required: "Enter Your City Name.",maxLength:12 }}
+        render={({ field }) => (
+        <FormControlLabel value="female" control={<Radio />} label="Female" error={Boolean(errors?.lastName)}
+            helperText={errors.lastName?.message} 
+            />
+            )}
+            />
+        <FormControlLabel value="male" control={<Radio />} label="Male"error={Boolean(errors?.lastName)}
+            helperText={errors.lastName?.message}/>
+        <FormControlLabel value="other" control={<Radio />} label="Other" error={Boolean(errors?.lastName)}
+            helperText={errors.lastName?.message}/>
+      </RadioGroup>
+    </FormControl>
+     </Stack>
+    
+
       </div>
     </>
   );
@@ -246,6 +442,10 @@ const ContactForm = () => {
   console.log(errors);
   return (
     <>
+
+<div className='third'>
+          <h1 style={{margin:"2rem",}}><mark style={{border:"5px solid deepskyblue", borderRadius:"125rem",margin:"1rem",padding:"1rem"}}>--*Educational Details*--</mark></h1>
+        </div>
        <div className='fourth'>
        <label htmlFor='Current Degree & Branch ' className='required' ><br />
                             Current Degree & Branch
@@ -253,7 +453,7 @@ const ContactForm = () => {
        <Controller
         control={control}
         name="Current"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "This field is required." }}
         render={({ field }) => (
           <TextField
             id="Current Degree & Branch"
@@ -277,7 +477,7 @@ const ContactForm = () => {
 <Controller
         control={control}
         name="Passed"
-        rules={{ required: "this field is required." }}
+        rules={{ required: "This field is required. greater than 2000",maxLength:"4",min:"2000",max:"2023" }}
         render={({ field }) => (
           <TextField
             id="Passed Out"
@@ -297,7 +497,7 @@ const ContactForm = () => {
     </>
   );
 };
-const PersonalForm = () => {
+const PersonalForm = (props) => {
   const {
     control,
     formState: { errors },
@@ -306,7 +506,9 @@ const PersonalForm = () => {
   return (
     <>
 
-
+<div className='third'>
+          <h1 style={{margin:"2rem",}}><mark style={{border:"5px solid deepskyblue", borderRadius:"125rem",margin:"1rem",padding:"1rem"}}>--*Internship Interested Field*--</mark></h1>
+        </div>
 
       
       {/* <FormControl>
@@ -388,146 +590,94 @@ const PersonalForm = () => {
                                 Internship Looking For
                             </label><br />
 
-                            <div >
-                                <label htmlFor='.Net MVC' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='.Net MVC' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    .Net MVC
-                                </label>
 
-
-                                <label htmlFor='Angular'  > <input type='radio' autoComplete='off' name='Internship Looking For' value='Angular' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Angular
-                                </label>
-
-
-                                <label htmlFor='BBA/MBA' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='BBA/MBA' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    BBA/MBA
-                                </label><br />
-
-
-                                <label htmlFor='Business Development' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Business Development' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Business Development
-                                </label>
-
-
-                                <label htmlFor='Digital Marketing' style={{ margin: "1rem" }}><input type='radio' autoComplete='off' name='Internship Looking For' value='Digital Marketing' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Digital Marketing
-                                </label>
-
-
-                                <label htmlFor='Finance' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Finance' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Finance
-                                </label><br />
-
-
-                                <label htmlFor='Flutter/Android/Ios' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Flutter/Android/Ios' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Flutter/Android/Ios
-                                </label>
-
-
-                                <label htmlFor='HR' className='aa'><input type='radio' autoComplete='off' name='Internship Looking For' value='HR' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    HR
-                                </label>
-
-
-                                <label htmlFor='Hardware' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Hardware' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Hardware
-                                </label><br />
-
-
-                                <label htmlFor='Html UI' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Html UI' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Html UI
-                                </label>
-
-
-                                <label htmlFor='IOT' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='IOT' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    IOT
-                                </label>
-
-
-                                <label htmlFor='Java' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Java' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Java
-                                </label><br />
-                                <label htmlFor='Laravel' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Laravel' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Laravel
-                                </label>
-
-
-                                <label htmlFor='Legal / Law Firm' className='a'>  <input type='radio' autoComplete='off' name='Internship Looking For' value='Legal / Law Firm' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Legal / Law Firm
-                                </label>
-
-
-                                <label htmlFor='Marketing' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Marketing' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Marketing
-                                </label><br />
-
-
-                                <label htmlFor='Networking' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Networking' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Networking
-                                </label>
-
-
-                                <label htmlFor='Photoshop' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Photoshop' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Photoshop
-                                </label>
-
-
-                                <label htmlFor='Php' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Php' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Php
-                                </label><br />
-
-
-                                <label htmlFor='Project Manager' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Project Manager' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Project Manager
-                                </label>
-
-
-                                <label htmlFor='Python' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Python' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Python
-                                </label>
-
-
-                                <label htmlFor='React ' className='a'> <input type='radio' autoComplete='off' name='Internship Looking For' value='React' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    React
-                                </label><br />
-
-
-                                <label htmlFor='SQL-Pl/Sql Oracle/MsSql' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='SQL-Pl/Sql Oracle/MsSql' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    SQL-Pl/Sql Oracle/MsSql
-                                </label>
-
-
-                                <label htmlFor='Sales' className='a'> <input type='radio' autoComplete='off' name='Internship Looking For' value='Sales' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Sales
-                                </label>
-
-
-                                <label htmlFor='Software Development' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='React' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Software Development
-                                </label><br />
-
-
-                                <label htmlFor='Testing' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Testing' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Testing
-                                </label>
-
-
-                                <label htmlFor='UI Designer(Figma,etc)' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='UI Designer(Figma,etc)' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    UI Designer(Figma,etc)
-                                </label>
-
-
-                                <label htmlFor='Web Development ' className='a'><input type='radio' autoComplete='off' name='Internship Looking For' value='Web Development' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Web Development
-                                </label><br />
-
-                                <label htmlFor='Other ' > <input type='radio' autoComplete='off' name='Internship Looking For' value='' id='Internship Looking For' placeholder='' style={{ margin: "1rem" }} />
-                                    Other
-                                </label>
-
-                            </div>
+                            <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+       <FormControl>
+      <FormLabel id="demo-row-radio-buttons-group-label"></FormLabel>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+        rules={{ required:true }}
+        
+      >
+      <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value=".Net MVC" control={<Radio />} label=".Net MVC" />
+        <FormControlLabel value=" Angular" control={<Radio />} label="Angular" />
+        <FormControlLabel value="  BBA/MBA" control={<Radio />} label="BBA/MBA" />
+        </Stack><br/>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value="  Business Development " control={<Radio />} label=" Business Development" />
+        <FormControlLabel value="  Digital Marketing" control={<Radio />} label="Digital Marketing" />
+        <FormControlLabel value="   Finance" control={<Radio />} label=" Finance" />
+        </Stack>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value="   Flutter/Android/Ios" control={<Radio />} label=" Flutter/Android/Ios" />
+        <FormControlLabel value="   HR" control={<Radio />} label=" HR" />
+        <FormControlLabel value="   Hardware" control={<Radio />} label=" Hardware" />
+      </Stack>
+      <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value="   Html UI" control={<Radio />} label=" Html UI" />
+        <FormControlLabel value="   IOT" control={<Radio />} label=" IOT" />
+        <FormControlLabel value="   Java" control={<Radio />} label=" Java" />
+        </Stack>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value="  Laravel" control={<Radio />} label="Laravel" />
+        <FormControlLabel value="    Legal / Law Firm" control={<Radio />} label="  Legal / Law Firm" />
+        <FormControlLabel value="   Marketing" control={<Radio />} label=" Marketing" />
+        </Stack>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value=" Networking" control={<Radio />} label="Networking" />
+        <FormControlLabel value="   Photoshop" control={<Radio />} label=" Photoshop" />
+        <FormControlLabel value="  Php" control={<Radio />} label="Php" />
+        </Stack>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value="   Project Manager" control={<Radio />} label=" Project Manager" />
+        <FormControlLabel value="  Python" control={<Radio />} label="Python" />
+        <FormControlLabel value="   React" control={<Radio />} label=" React" />
+        </Stack>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value="  SQL-Pl/Sql Oracle/MsSql  " control={<Radio />} label="  SQL-Pl/Sql Oracle/MsSql" />
+        <FormControlLabel value="  Sales " control={<Radio />} label=" Sales" />
+        <FormControlLabel value="  Software Development " control={<Radio />} label="Software Development " />
+        </Stack>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value="   Testing " control={<Radio />} label=" Testing " />
+        <FormControlLabel value="   UI Designer(Figma,etc)" control={<Radio />} label="  UI Designer(Figma,etc)" />
+        <FormControlLabel value=" Web Development  " control={<Radio />} label=" Web Development" />
+        </Stack>
+        <Stack
+  direction={{ xs: 'column', sm: 'row' }}
+  spacing={{ xs: 1, sm: 2, md: 4 }} rules={{ required:"required"}}>
+        <FormControlLabel value=" Other " control={<Radio />} label=" Other" />
+        
+        </Stack>
+      </RadioGroup>
+    </FormControl>
+     </Stack>
+                          
                             
-                            <Controller
+                            {/* <Controller
         control={control}
         name="other"
         rules={{ required: "this field is required." }}
@@ -545,7 +695,7 @@ const PersonalForm = () => {
             helperText={errors.other?.message}
           />
         )}
-      />
+      /> */}
       
 
                             <br />
@@ -570,7 +720,7 @@ const PersonalForm = () => {
     </>
   );
 };
-const PaymentForm = () => {
+const PaymentForm = (props) => {
   const [visible, setvisible] = useState(true)
     const [ivisible, getvisible] = useState(true)
   const {
@@ -580,7 +730,9 @@ const PaymentForm = () => {
   console.log(errors);
   return (
     <>
-
+<div className='third'>
+          <h1 style={{margin:"2rem",}}><mark style={{border:"5px solid deepskyblue", borderRadius:"125rem",margin:"1rem",padding:"1rem"}}>--*Internship Option*--</mark></h1>
+        </div>
 <br />
                         <br />
 <p>Please Read The Complete Details below and Choosse your option</p>
@@ -637,7 +789,7 @@ const PaymentForm = () => {
                         <br />
                         <hr /><br />
                         {/* 7 */}
-                        <h1>Internship Availability for UI Designer (Figma,etc)</h1><br /><hr />
+                        <h1>Internship Availability for{props.PersonalForm}</h1><br /><hr />
                         {/* 8 */}
                         <br />
                         <p>Sometimes Internship will not be available in Option 2,HR Team will update you on the same during evaluating your form</p>
@@ -748,6 +900,9 @@ const Refer = () => {
   console.log(errors);
   return (
     <>
+    <div className='third'>
+          <h1 style={{margin:"2rem",}}><mark style={{border:"5px solid deepskyblue", borderRadius:"125rem",margin:"1rem",padding:"1rem"}}>--*References*--</mark></h1>
+        </div>
      <div className='fourth' >
     <label htmlFor='' style={{color:"black"}} ><br /><br />
                             <p className="required" style={{color:"black"}}> How You Know about the Internship in KGE Technologies Pvt Ltd</p>
@@ -809,6 +964,9 @@ const Refer = () => {
       console.log(errors);
       return (
         <>
+        <div className='third'>
+          <h1 style={{margin:"2rem",}}><mark style={{border:"5px solid deepskyblue", borderRadius:"125rem",margin:"1rem",padding:"1rem"}}>--*Submission*--</mark></h1>
+        </div>
             <br/><p className="required">Terms and Conditions</p>
                         <br />
 

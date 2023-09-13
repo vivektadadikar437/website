@@ -32,14 +32,14 @@
 
 .third {
   color: black;
-  float: left;
+  text-align: center;
   margin: auto;
 }
 
-.fourth {
+/* .fourth {
   margin: 1rem;
   padding: 1rem;
-}
+} */
 
 
 .button {
@@ -85,7 +85,7 @@
 
 .fourth{
   font-family: 'Courier New', Courier, monospace;
-  animation-duration: 1s;
+  animation-duration:100ms;
   animation-name: slidein;
 }
 @keyframes slidein{
@@ -98,10 +98,191 @@
 }
 
 @media (max-width: 450px) {
-  h1 {
+  h1 ,.third{
     font-size: xx-small;
+    font-weight: 100;
   }
 
+}
+
+.css-1mxtuxc-MuiContainer-root {
+  padding: 32px;
+    padding-right: 32px;
+    padding-left: 32px;
+  width: 146%;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+
+@media (max-width: 361px) {
+  h2,.third {
+    text-align: center;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 811px) {
+  h1 {
+    font-size: small;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 450px) {
+  h1 {
+    font-size:2vw;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 376px) {
+  h1,.third {
+    font-size: x-large;
+    font-weight: 100;
+  }
+
+}
+@media (max-width: 361px) {
+  h1 {
+    font-size:2vw;
+    border-width:thin;
+    font-weight: 100;
+  }
+
+}
+@media (max-width: 385px) {
+  h1 {
+    font-size:1px;
+    font-weight: 100;
+   
+  }
+
+}
+
+@media (max-width: 391px) {
+  h1 {
+    font-size:2vw;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 361px) {
+  h1 {
+    font-size:42%;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 385px) {
+  h1 {
+    font-size:42%;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 385px) {
+  h1 {
+    font-size:42%;
+    font-weight: 100;
+  }
+
+}
+@media (max-width: 916px) {
+  h1 {
+       
+    font-weight: 100;
+  }
+
+}
+@media (max-width: 884px) {
+  h1 {
+    font-size:2vw;   
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 361px) {
+  h1 {
+    font-size:1.5vw;   
+    
+  }
+
+}
+
+@media (max-width: 385px) {
+  h1 {
+    font-size:1vw;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 927px) {
+  h1 {
+    font-size:2vw;
+  
+  }
+
+}
+
+@media (max-width: 361px) {
+  h1 {
+    font-size:1vw;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 385px) {
+  h1 {
+    font-size:1vw;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 377px) {
+  h1 {
+    font-size:2vw;
+    font-weight: 100;
+  }
+
+}
+
+@media (max-width: 361px) {
+  h1 {
+    font-size:1.5mm;
+    font-weight: 100;
+  }
+
+}
+
+
+  
+
+/* @media only screen and (min-width: 200px) and (max-width: 567px){
+  
+} */
+
+@media (max-width:500px){
+  .Box {
+    display: block;
+  }
+  .Container {
+   display: block;
+  }
 }
 
 
